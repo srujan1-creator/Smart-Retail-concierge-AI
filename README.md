@@ -9,6 +9,10 @@
 [![Gemini](https://img.shields.io/badge/Gemini_2.0_Flash-Powered-4285F4?style=flat-square&logo=google&logoColor=white)](https://ai.google.dev)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/srujan1-creator/Smart-Retail-concierge-AI)
+
+<br/>
+
 **An AI-powered luxury retail shopping assistant with real-time Gemini intelligence, virtual try-on, semantic product search, and a premium mobile-first UI.**
 
 [Features](#-features) • [Demo](#-demo) • [Quick Start](#-quick-start) • [Architecture](#-architecture) • [API Reference](#-api-reference) • [Tech Stack](#-tech-stack)
