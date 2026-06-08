@@ -19,7 +19,7 @@
 
 ## ✨ Features
 
-### 🧠 AI-Powered Concierge (Gemini 2.0 Flash)
+### 🧠 AI-Powered Concierge (Gemini 2.5 Flash)
 - **Real-time conversational AI** — Powered by Google's Gemini 2.0 Flash model
 - **Multi-turn memory** — Maintains conversation context across messages
 - **Product-aware responses** — Semantic search results injected into AI context
