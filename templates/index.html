@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Concierge - Intelligent Shopping Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=13">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- LEFT PANEL: AURA INTELLIGENT CHAT CONCIERGE -->
+        <div class="chat-panel">
+            <div class="chat-header">
+                <div class="brand-info">
+                    <div class="brand-logo" style="background: linear-gradient(135deg, #ff6b35, #f7c948); display: flex; align-items: center; justify-content: center; padding: 0; overflow: hidden;">
+                        <svg viewBox="0 0 40 40" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Phoenix body -->
+                            <path d="M20 6 C16 10, 12 16, 13 22 C14 28, 18 32, 20 35 C22 32, 26 28, 27 22 C28 16, 24 10, 20 6Z" fill="white" opacity="0.95"/>
+                            <!-- Left wing -->
+                            <path d="M13 22 C10 18, 5 16, 3 18 C5 20, 9 22, 13 22Z" fill="white" opacity="0.7"/>
+                            <path d="M14 19 C11 14, 7 11, 4 12 C6 14, 10 17, 14 19Z" fill="white" opacity="0.5"/>
+                            <!-- Right wing -->
+                            <path d="M27 22 C30 18, 35 16, 37 18 C35 20, 31 22, 27 22Z" fill="white" opacity="0.7"/>
+                            <path d="M26 19 C29 14, 33 11, 36 12 C34 14, 30 17, 26 19Z" fill="white" opacity="0.5"/>
+                            <!-- Head flame -->
+                            <path d="M20 6 C18 3, 19 1, 20 0 C21 1, 22 3, 20 6Z" fill="white" opacity="0.8"/>
+                            <path d="M17 8 C15 5, 16 3, 17 2 C18 4, 18 6, 17 8Z" fill="white" opacity="0.4"/>
+                            <path d="M23 8 C25 5, 24 3, 23 2 C22 4, 22 6, 23 8Z" fill="white" opacity="0.4"/>
+                            <!-- Eye -->
+                            <circle cx="18.5" cy="13" r="1" fill="#ff6b35"/>
+                            <circle cx="21.5" cy="13" r="1" fill="#ff6b35"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="brand-name">Phoenix AI Concierge</h1>
+                        <p class="brand-tagline"><span class="status-indicator"></span>Gemini Powered Agent • Active</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button id="reset-session" title="Reset Assistant & Cart">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Conversation messages container -->
+            <div class="chat-messages" id="chat-messages">
+                <div class="message assistant-message">
+                    <div class="message-content">
+                        Hello Alex! I am your <strong>Aura Concierge</strong>. I have loaded your profile and sync'd with your local inventory database and calendar.
+                        <br><br>
+                        I noticed you have a <em>Meeting in Soho at 2:00 PM today</em>. How can I assist you with your wardrobe selections?
+                    </div>
+                    <span class="message-time">12:30 PM</span>
+                </div>
+            </div>
+
+            <!-- Quick Suggestion Chips -->
+            <div class="chat-suggestions">
+                <button class="suggestion-chip" data-query="Show me something casual but formal enough for a tech networking mixer">
+                    👔 Networking Mixer Outfit
+                </button>
+                <button class="suggestion-chip" data-query="Check if the Premium Merino Polo is in stock nearby">
+                    📍 Check Polo Stock Nearby
+                </button>
+                <button class="suggestion-chip" data-query="Should I choose home delivery or pickup for my order?">
+                    📅 Delivery vs. Pickup
+                </button>
+                <button class="suggestion-chip" data-query="Reserve a fitting room to try on my items">
+                    🔑 Reserve Fitting Room
+                </button>
+            </div>
+
+            <!-- Input area -->
+            <div class="chat-input-area">
+                <form id="chat-form">
+                    <input type="text" id="chat-input" placeholder="Ask Aura about product catalog, live inventory, styling..." autocomplete="off">
+                    <button type="submit" id="chat-submit" aria-label="Send message">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: HIGH-FIDELITY MOBILE DEVICE SIMULATOR -->
+        <div class="simulator-panel">
+            <div class="phone-frame">
+                <div class="phone-inner">
+                    <!-- Status Bar -->
+                    <div class="phone-status-bar">
+                        <span class="phone-time">12:30</span>
+                        <div class="phone-notch"></div>
+                        <div class="phone-status-icons">
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 19.4c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.9-1.9C9.07 19.58 10.48 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+                            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M17 5H7c-1.1 0-1.99.9-1.99 2v10c0 1.1.89 2 1.99 2h10c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zM7 7h10v10H7V7z"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Phone Sidebar Drawer -->
+                    <div class="phone-drawer-overlay" id="phone-drawer-overlay"></div>
+                    <div class="phone-drawer" id="phone-drawer">
+                        <div class="drawer-header">
+                            <div class="drawer-profile">
+                                <div class="drawer-avatar">AS</div>
+                                <div>
+                                    <h4 class="drawer-profile-name">Alex Sterling</h4>
+                                    <p class="drawer-profile-email">alex@sterling.design</p>
+                                </div>
+                            </div>
+                            <button class="close-drawer-btn" id="btn-close-drawer">×</button>
+                        </div>
+                        <div class="drawer-menu">
+                            <button class="drawer-item active" data-target="bag">
+                                <span class="drawer-icon">👜</span> Shopping Bag
+                            </button>
+                            <button class="drawer-item" data-target="map">
+                                <span class="drawer-icon">📍</span> Local Stock & Map
+                            </button>
+                            <button class="drawer-item" data-target="fitting-room">
+                                <span class="drawer-icon">🔑</span> Smart Fitting Room
+                            </button>
+                            <button class="drawer-item" data-target="delivery">
+                                <span class="drawer-icon">🚚</span> Shipping & Delivery
+                            </button>
+                            <button class="drawer-item" data-target="payment">
+                                <span class="drawer-icon">💳</span> Payment Methods
+                            </button>
+                            <button class="drawer-item" data-target="receipt">
+                                <span class="drawer-icon">🧾</span> Order Receipt
+                            </button>
+                            <button class="drawer-item" data-target="virtual-fit">
+                                <span class="drawer-icon">📷</span> AR Try-On Camera
+                            </button>
+                        </div>
+                        <div class="drawer-footer">
+                            <p class="drawer-version">Aura Concierge v1.0</p>
+                            <p class="drawer-copyright">© 2026 Aura AI</p>
+                        </div>
+                    </div>
+
+                    <!-- App Screens Container -->
+                    <div class="phone-screen-content">
+                        
+                        <!-- SCREEN 1: SHOPPING BAG -->
+                        <div class="app-screen active-screen" id="screen-bag">
+                            <div class="screen-header">
+                                <button class="menu-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+                                <span class="screen-title">Aura Concierge</span>
+                                <div class="header-right">
+                                    <div class="bag-icon-wrapper">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                                        <span class="bag-count">2</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="screen-body">
+                                <div class="section-title-wrapper">
+                                    <h2 class="section-main-title">Shopping Bag</h2>
+                                    <p class="section-subtitle">Your premium selection curated by Aura AI.</p>
+                                </div>
+
+                                <div class="cart-items-list" id="cart-items">
+                                     <!-- Dynamic Items Go Here -->
+                                </div>
+
+                                 <!-- Aura Tip Component -->
+                                 <div class="aura-tip-card">
+                                     <div class="tip-icon">✨</div>
+                                     <div class="tip-body">
+                                         <p class="tip-title">Aura's Tip</p>
+                                         <p class="tip-text">These items pair perfectly with the <span class="tip-link" data-add-item="7">Silk Pocket Square</span> in your wishlist. Add it now to complete the look?</p>
+                                         <button class="tip-action-btn" id="add-tip-item">+ ADD TO BAG</button>
+                                     </div>
+                                 </div>
+
+                                 <!-- AI Recommendations Section -->
+                                 <div class="recommendations-section" id="cart-recommendations-section" style="display: none; margin-top: 15px; margin-bottom: 15px;">
+                                     <p class="ar-carousel-title" style="margin-bottom: 8px;">AURA RECOMMENDS</p>
+                                     <div class="recommendations-container" id="cart-recommendations-container" style="display: flex; flex-direction: column; gap: 10px;">
+                                         <!-- Dynamic Recommendation Cards Go Here -->
+                                     </div>
+                                 </div>
+
+                                <!-- Promo Code -->
+                                <div class="promo-section">
+                                    <input type="text" placeholder="Promo Code" id="promo-input" value="">
+                                    <button id="promo-apply-btn">APPLY</button>
+                                </div>
+
+                                <!-- Order Summary -->
+                                <div class="summary-card">
+                                    <h3 class="summary-title">Order Summary</h3>
+                                    <div class="summary-row">
+                                        <span>Subtotal</span>
+                                        <span id="summary-subtotal">$640.00</span>
+                                    </div>
+                                    <div class="summary-row">
+                                        <span>Shipping</span>
+                                        <span class="free-badge" id="summary-shipping">Free</span>
+                                    </div>
+                                    <div class="summary-row">
+                                        <span>Estimated Tax</span>
+                                        <span id="summary-tax">$51.20</span>
+                                    </div>
+                                    <div class="summary-divider"></div>
+                                    <div class="summary-row total-row">
+                                        <span>Total</span>
+                                        <span id="summary-total">$691.20</span>
+                                    </div>
+                                </div>
+
+                                <button class="primary-btn green-btn proceed-btn" id="btn-proceed-checkout">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:8px"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                    Proceed to Checkout
+                                </button>
+                                <p class="checkout-footer-text">🔒 Secure checkout powered by Aura Concierge</p>
+                            </div>
+                        </div>
+
+                        <!-- SCREEN 2: SHIPPING & DELIVERY -->
+                        <div class="app-screen" id="screen-delivery">
+                            <div class="screen-header">
+                                <button class="back-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></button>
+                                <span class="screen-title">Shipping & Delivery</span>
+                                <div class="header-right">
+                                    <div class="bag-icon-wrapper">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                                         <span class="bag-count">2</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="screen-body">
+                                <!-- Step progress -->
+                                <div class="progress-bar-steps">
+                                    <div class="step completed">1 <span class="step-label">Cart</span></div>
+                                    <div class="step-line active"></div>
+                                    <div class="step active">2 <span class="step-label">Shipping</span></div>
+                                    <div class="step-line"></div>
+                                    <div class="step">3 <span class="step-label">Payment</span></div>
+                                </div>
+
+                                <div class="section-title-wrapper">
+                                    <h2 class="section-main-title">Shipping & Delivery</h2>
+                                    <p class="section-subtitle">Choose how you'd like to receive your order.</p>
+                                </div>
+
+                                <!-- Delivery Method Toggles -->
+                                <div class="delivery-options-list">
+                                    <div class="delivery-card active" id="delivery-home">
+                                        <div class="delivery-card-icon">🏠</div>
+                                        <div class="delivery-card-info">
+                                            <p class="delivery-card-title">Home Delivery</p>
+                                            <p class="delivery-card-desc">Reliable doorstep service.</p>
+                                        </div>
+                                        <div class="delivery-radio-btn checked"></div>
+                                    </div>
+                                    
+                                    <div class="delivery-card" id="delivery-pickup">
+                                        <div class="delivery-card-icon">🏬</div>
+                                        <div class="delivery-card-info">
+                                            <p class="delivery-card-title">In-Store Pickup</p>
+                                            <p class="delivery-card-desc">Ready in 2 hours at Soho Flagship.</p>
+                                        </div>
+                                        <div class="delivery-radio-btn"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Address Section -->
+                                <div class="address-section" id="address-section-block">
+                                    <div class="section-header-row">
+                                        <h3 class="input-section-title">Shipping Address</h3>
+                                        <button class="edit-link-btn" id="btn-edit-shipping-address">Edit</button>
+                                    </div>
+                                    <div class="address-display-box" id="address-display-box">
+                                        <p class="address-name" id="user-profile-name">Alex Sterling</p>
+                                        <p class="address-details" id="user-profile-address">72 Greene Street, Apt 4B<br>Soho, New York, NY 10012</p>
+                                        <span class="address-badge">Primary Address</span>
+                                    </div>
+                                    <div class="address-edit-box" id="address-edit-box" style="display: none; background: #FFF; border: 1px solid var(--color-border-phone); border-radius: 8px; padding: 12px; margin-top: 8px;">
+                                        <label style="font-size: 11px; font-weight: 700; color: var(--color-text-dark); display: block; margin-bottom: 4px;">STREET ADDRESS</label>
+                                        <textarea id="input-edit-address" style="width: 100%; height: 60px; border: 1px solid #CCC; border-radius: 4px; padding: 6px; font-size: 13px; font-family: inherit; resize: none; margin-bottom: 8px; color: #1A1F26;"></textarea>
+                                        <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                                            <button id="btn-cancel-address-edit" style="background: #F1F3F5; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; color: #495057;">Cancel</button>
+                                            <button id="btn-save-address-edit" style="background: var(--color-primary); color: #FFF; border: none; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: 700;">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Delivery Speed Options -->
+                                <div class="delivery-speed-section" id="speed-section-block">
+                                    <h3 class="input-section-title">Delivery Speed</h3>
+                                    
+                                    <div class="speed-option-card active" id="speed-standard">
+                                        <div class="speed-info">
+                                            <p class="speed-title">Standard Shipping</p>
+                                            <p class="speed-time">3-5 business days</p>
+                                        </div>
+                                        <span class="speed-price-free">Free</span>
+                                    </div>
+
+                                    <div class="speed-option-card" id="speed-express">
+                                        <div class="speed-info">
+                                            <p class="speed-title">Express Delivery</p>
+                                            <p class="speed-time">Tomorrow by 10 AM</p>
+                                        </div>
+                                        <span class="speed-price">$15.00</span>
+                                    </div>
+                                </div>
+
+                                <!-- Aura Insight Box -->
+                                <div class="aura-insight-card" id="delivery-insight-card">
+                                    <div class="insight-icon">💡</div>
+                                    <div class="insight-body">
+                                        <p class="insight-title">Aura Insight</p>
+                                        <p class="insight-text" id="insight-delivery-text">Since you have a meeting in Soho at 2:00 PM today, <span class="insight-link" id="select-pickup-insight">In-Store Pickup</span> would save you shipping time and allow you to try your items in the private lounge.</p>
+                                    </div>
+                                </div>
+
+                                <button class="primary-btn black-btn" id="btn-delivery-continue">Continue to Payment ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- SCREEN 3: PAYMENT METHOD -->
+                        <div class="app-screen" id="screen-payment">
+                            <div class="screen-header">
+                                <button class="back-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></button>
+                                <span class="screen-title">Payment Method</span>
+                                <div class="header-right"><span style="font-size:16px">🔐</span></div>
+                            </div>
+
+                            <div class="screen-body">
+                                <div class="payment-amount-box">
+                                    <p class="payment-amount-label">Total Amount</p>
+                                    <h2 class="payment-amount-value" id="payment-total-value">$691.20</h2>
+                                </div>
+
+                                <div class="section-title-wrapper">
+                                    <h3 class="input-section-title">Select Payment Method</h3>
+                                </div>
+
+                                <div class="payment-methods-list">
+                                    <div class="payment-card active" id="payment-visa">
+                                        <div class="payment-card-icon">💳</div>
+                                        <div class="payment-card-details">
+                                            <p class="payment-card-title">Visa <span class="card-last4-txt">ending in 4242</span></p>
+                                            <p class="payment-card-expiry">Expires 12/26</p>
+                                        </div>
+                                        <div class="payment-radio checked"></div>
+                                    </div>
+
+                                    <div class="payment-card" id="payment-apple">
+                                        <div class="payment-card-icon">🍎</div>
+                                        <div class="payment-card-details">
+                                            <p class="payment-card-title">Apple Pay</p>
+                                            <p class="payment-card-expiry">Quick checkout with FaceID</p>
+                                        </div>
+                                        <div class="payment-radio"></div>
+                                    </div>
+                                </div>
+
+                                <div class="security-disclaimer">
+                                    <p>Your data is protected by industry-standard encryption protocols.</p>
+                                </div>
+
+                                <button class="primary-btn black-btn" id="btn-payment-continue">Review Order ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- SCREEN 4: REVIEW & PLACE ORDER -->
+                        <div class="app-screen" id="screen-review">
+                            <div class="screen-header">
+                                <button class="back-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></button>
+                                <span class="screen-title">Review Order</span>
+                                <div class="header-right"><button class="help-btn" id="btn-checkout-help" style="font-size:16px; background:none; border:none; cursor:pointer;" title="Checkout Help">❓</button></div>
+                            </div>
+
+                            <div class="screen-body">
+                                <div class="progress-bar-steps">
+                                    <div class="step completed">1 <span class="step-label">Shipping</span></div>
+                                    <div class="step-line completed"></div>
+                                    <div class="step completed">2 <span class="step-label">Payment</span></div>
+                                    <div class="step-line active"></div>
+                                    <div class="step active">3 <span class="step-label">Review</span></div>
+                                </div>
+
+                                <div class="review-block">
+                                    <div class="review-block-header">
+                                        <h3 class="review-block-title">Shipping Details</h3>
+                                        <button class="edit-link-btn" data-go-screen="delivery">EDIT</button>
+                                    </div>
+                                    <div class="review-block-body">
+                                        <p class="review-text-bold" id="review-shipping-title">Home Delivery</p>
+                                        <p class="review-text-sub" id="review-shipping-address">Alex Sterling, 72 Greene Street, Soho, NY</p>
+                                    </div>
+                                </div>
+
+                                <div class="review-block">
+                                    <div class="review-block-header">
+                                        <h3 class="review-block-title">Payment Method</h3>
+                                        <button class="edit-link-btn" data-go-screen="payment">EDIT</button>
+                                    </div>
+                                    <div class="review-block-body">
+                                        <p class="review-text-bold" id="review-payment-title">Visa **** 4242</p>
+                                        <p class="review-text-sub">Billing address same as shipping</p>
+                                    </div>
+                                </div>
+
+                                <div class="review-items-section">
+                                    <h3 class="review-block-title" id="review-items-count">ORDER ITEMS (2)</h3>
+                                    <div class="review-items-list" id="review-items-container">
+                                        <!-- items render here -->
+                                    </div>
+                                </div>
+
+                                <div class="aura-insight-card" style="margin-top: 15px;">
+                                    <div class="insight-icon">✨</div>
+                                    <div class="insight-body">
+                                        <p class="insight-title">Aura Insight</p>
+                                        <p class="insight-text" id="review-insight-text">Great choice! These items perfectly complement the blazer you've selected.</p>
+                                    </div>
+                                </div>
+
+                                <div class="review-totals-list">
+                                    <div class="total-row-sub">
+                                        <span>Subtotal</span>
+                                        <span id="review-subtotal">$640.00</span>
+                                    </div>
+                                    <div class="total-row-sub">
+                                        <span>Shipping</span>
+                                        <span id="review-shipping">Free</span>
+                                    </div>
+                                    <div class="total-row-sub">
+                                        <span>Estimated Tax</span>
+                                        <span id="review-tax">$51.20</span>
+                                    </div>
+                                    <div class="total-row-main">
+                                        <span>Order Total</span>
+                                        <span id="review-total">$691.20</span>
+                                    </div>
+                                </div>
+
+                                <button class="primary-btn green-btn" id="btn-place-order">Place Order ➔</button>
+                                <p class="checkout-footer-text">🔒 Secure encrypted transaction powered by Aura Pay</p>
+                            </div>
+                        </div>
+
+                        <!-- SCREEN 5: SMART FITTING ROOM -->
+                        <div class="app-screen" id="screen-fitting-room">
+                            <div class="screen-header">
+                                <button class="menu-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+                                <span class="screen-title">Smart Fitting Room</span>
+                                <div class="header-right">
+                                    <div class="bag-icon-wrapper">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                                         <span class="bag-count">2</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="screen-body">
+                                <div class="section-title-wrapper">
+                                    <h2 class="section-main-title">Smart Fitting Room</h2>
+                                    <p class="section-subtitle">Items selected for try-on.</p>
+                                </div>
+
+                                <div class="fitting-items-summary" id="fitting-items-count-header">Items for Try-on <span class="item-count-badge">2 ITEMS</span></div>
+                                
+                                <div class="fitting-items-list" id="fitting-items-container">
+                                    <!-- Dynamic selection -->
+                                </div>
+
+                                <div class="store-reservation-card">
+                                    <div class="store-icon">🏪</div>
+                                    <div class="store-details">
+                                        <p class="store-name"><span id="fitting-store-name">Soho Flagship</span> <button class="change-store-btn" type="button">CHANGE</button></p>
+                                        <p class="store-address" id="fitting-store-address">452 Broadway, New York, NY 10013</p>
+                                        <div class="store-status-row">
+                                            <span class="status-dot green"></span>
+                                            <span class="status-txt">Items Ready for Reservation</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="reservation-scheduler">
+                                    <h3 class="input-section-title">Select Reservation</h3>
+                                    
+                                    <div class="date-selector-row">
+                                        <div class="date-pill active" id="date-today">
+                                            <span class="day-label">TODAY</span>
+                                            <span class="date-label">Oct 24</span>
+                                        </div>
+                                        <div class="date-pill" id="date-tomorrow">
+                                            <span class="day-label">TOMORROW</span>
+                                            <span class="date-label">Oct 25</span>
+                                        </div>
+                                    </div>
+
+                                    <h4 class="time-slots-title">AVAILABLE SLOTS</h4>
+                                    <div class="time-slots-grid">
+                                        <button class="slot-btn">11:00 AM</button>
+                                        <button class="slot-btn active">12:30 PM</button>
+                                        <button class="slot-btn">01:45 PM</button>
+                                        <button class="slot-btn">03:15 PM</button>
+                                        <button class="slot-btn">04:30 PM</button>
+                                        <button class="slot-btn">05:45 PM</button>
+                                    </div>
+                                </div>
+
+                                <div class="stylist-recommendation-card" id="stylist-card">
+                                    <div class="recommendation-header">
+                                        <span class="rec-badge">💎 EXPERT CURATION</span>
+                                        <h4 class="rec-title">Stylist's Recommendation</h4>
+                                    </div>
+                                    <div class="recommendation-body">
+                                        <div class="rec-product-image-container">
+                                            <img src="/static/images/products/pocket_square.png" alt="Silk Pocket Square" class="rec-prod-img">
+                                        </div>
+                                        <div class="rec-details">
+                                            <p class="rec-description">We've added a matching <strong>Silk Pocket Square</strong> in your room to complete the look.</p>
+                                            <button class="rec-add-btn" id="btn-add-rec">Add to Reservation (+$45.00)</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="primary-btn green-btn" id="btn-confirm-reservation" style="margin-top:20px">Confirm Fitting Reservation</button>
+                            </div>
+                        </div>
+
+                        <!-- SCREEN 6: LOCAL STOCK MAP -->
+                        <div class="app-screen" id="screen-map">
+                            <div class="screen-header">
+                                <button class="back-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></button>
+                                <span class="screen-title">Local Stock</span>
+                                <div class="header-right">
+                                    <div class="bag-icon-wrapper">
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                                         <span class="bag-count">2</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Map View Cover Area -->
+                            <div class="map-view-container">
+                                <!-- Top item identifier banner -->
+                                <div class="item-checking-banner">
+                                    <div class="checking-img-container">
+                                        <img src="/static/images/products/merino_polo.png" alt="Premium Merino Polo" id="checking-item-img">
+                                    </div>
+                                    <div class="checking-details">
+                                        <span class="checking-label">CURRENTLY CHECKING</span>
+                                        <p class="checking-name" id="checking-item-name">Premium Merino Polo</p>
+                                    </div>
+                                </div>
+
+                                <!-- Search bar on top of map -->
+                                <div class="map-search-bar">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                    <input type="text" placeholder="Search by city or zip code" value="New York, NY">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="voice-icon"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                                </div>
+
+                                <!-- Simulated Map Canvas/SVG -->
+                                <div class="simulated-map" id="simulated-map-element">
+                                    <!-- Embedded Vector Map drawing -->
+                                    <svg viewBox="0 0 400 500" class="map-vector-svg">
+                                        <!-- Map roads -->
+                                        <path d="M0,80 Q200,90 400,100" stroke="#E6E9EB" stroke-width="12" fill="none"/>
+                                        <path d="M0,220 Q200,230 400,240" stroke="#E6E9EB" stroke-width="16" fill="none"/>
+                                        <path d="M0,380 Q200,390 400,400" stroke="#E6E9EB" stroke-width="12" fill="none"/>
+                                        <path d="M80,0 Q90,250 100,500" stroke="#E6E9EB" stroke-width="14" fill="none"/>
+                                        <path d="M220,0 Q230,250 240,500" stroke="#E6E9EB" stroke-width="16" fill="none"/>
+                                        <path d="M330,0 Q345,250 360,500" stroke="#E6E9EB" stroke-width="10" fill="none"/>
+                                        
+                                        <!-- Highway diagonal -->
+                                        <path d="M0,0 Q180,220 400,480" stroke="#D5DADF" stroke-width="22" fill="none" opacity="0.6"/>
+
+                                        <!-- Interactive Map Pins -->
+                                        <!-- Pin 1: Soho Flagship -->
+                                        <g class="map-pin active-pin" id="pin-soho" transform="translate(240, 230)">
+                                            <circle cx="0" cy="0" r="14" fill="#2E6F40" opacity="0.2" class="pulse-ring"/>
+                                            <circle cx="0" cy="0" r="8" fill="#2E6F40" stroke="#FFFFFF" stroke-width="2"/>
+                                            <path d="M0,-8 L0,-16" stroke="#2E6F40" stroke-width="2"/>
+                                        </g>
+
+                                        <!-- Pin 2: Chelsea Store -->
+                                        <g class="map-pin" id="pin-chelsea" transform="translate(95, 120)">
+                                            <circle cx="0" cy="0" r="8" fill="#2E6F40" stroke="#FFFFFF" stroke-width="2"/>
+                                        </g>
+
+                                        <!-- Pin 3: Brooklyn Hub -->
+                                        <g class="map-pin" id="pin-brooklyn" transform="translate(190, 390)">
+                                            <circle cx="0" cy="0" r="8" fill="#2E6F40" stroke="#FFFFFF" stroke-width="2"/>
+                                        </g>
+                                    </svg>
+                                </div>
+
+                                <!-- Dynamic Store Info Card Slider at bottom of map -->
+                                <div class="map-store-cards-slider">
+                                    <div class="store-info-slide-card" id="map-store-card">
+                                        <div class="card-top-row">
+                                            <div>
+                                                <h4 class="map-store-title" id="map-store-title">Soho Flagship</h4>
+                                                <p class="map-store-dist" id="map-store-distance">0.8 miles away</p>
+                                            </div>
+                                            <span class="store-badge-hub" id="map-store-badge">MAIN HUB</span>
+                                        </div>
+                                        <div class="card-stock-row">
+                                            <span class="stock-status-dot green"></span>
+                                            <span class="stock-status-txt" id="map-store-stock">In Stock — 3 left</span>
+                                        </div>
+                                        <div class="card-actions-row">
+                                            <button class="store-action-btn outline-btn" id="map-btn-directions">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+                                                GET DIRECTIONS
+                                            </button>
+                                            <button class="store-action-btn solid-btn" id="map-btn-reserve">RESERVE TRY-ON</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SCREEN 7: DIGITAL RECEIPT & PICKUP -->
+                        <div class="app-screen" id="screen-receipt">
+                            <div class="screen-header">
+                                <button class="back-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></button>
+                                <span class="screen-title" id="receipt-screen-title">Profile & Orders</span>
+                                <div class="header-right">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                                </div>
+                            </div>
+
+                            <div class="screen-body" style="padding-bottom: 30px;">
+                                <!-- Active Session Order Receipt -->
+                                <div id="active-order-block" style="display: none;">
+                                    <div class="confirmation-success-header">
+                                        <div class="success-check-badge">✓</div>
+                                        <h2 class="conf-title">Order Confirmed</h2>
+                                        <p class="conf-subtitle" id="receipt-conf-subtitle">Your personal concierge has secured your items. They are ready for pickup.</p>
+                                    </div>
+
+                                    <!-- Pickup Pass QR Code -->
+                                    <div class="pickup-pass-card">
+                                        <div class="qr-code-box">
+                                            <!-- Generated barcode or QR representation -->
+                                            <div class="simulated-qr">
+                                                <div class="qr-row"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                                                <div class="qr-row"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                                                <div class="qr-row"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                                                <div class="qr-row"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                                            </div>
+                                        </div>
+                                        <p class="pickup-pass-label" id="receipt-pass-label">PICKUP PASS</p>
+                                        <p class="pickup-pass-desc" id="receipt-pass-desc">Show this code at the <strong id="receipt-store-bold">Soho Flagship</strong> pickup counter</p>
+                                        
+                                        <!-- Apple Wallet integration button -->
+                                        <button class="apple-wallet-btn" id="btn-add-wallet">
+                                            <svg viewBox="0 0 100 32" class="apple-wallet-svg" style="height: 20px;">
+                                                <path fill="#000000" d="M91.8,0H8.2C3.7,0,0,3.7,0,8.2v15.6C0,28.3,3.7,32,8.2,32h83.6c4.5,0,8.2-3.7,8.2-8.2V8.2C100,3.7,96.3,0,91.8,0z"/>
+                                                <path fill="#FFFFFF" d="M19.1,10.6c-0.2,0-0.4,0.1-0.5,0.3L16.2,16H22l-2.4-5.1C19.5,10.7,19.3,10.6,19.1,10.6z M27.8,21.3h-1.9l-1.3-2.9h-5.2l-1.3,2.9H16.2L21,10.9h1.9L27.8,21.3z M34.6,13.8c0.7,0,1.3,0.2,1.8,0.7s0.8,1.2,0.8,2c0,0.8-0.3,1.5-0.8,2c-0.5,0.5-1.1,0.7-1.8,0.7s-1.3-0.2-1.8-0.7c-0.5-0.5-0.8-1.2-0.8-2c0-0.8,0.3-1.5,0.8-2C33.3,14,33.9,13.8,34.6,13.8z M34.6,12.2c-1.2,0-2.2,0.4-3,1.2s-1.2,1.8-1.2,3s0.4,2.2,1.2,3s1.8,1.2,3,1.2s2.2-0.4,3-1.2s1.2-1.8,1.2-3s-0.4-2.2-1.2-3S35.8,12.2,34.6,12.2z"/>
+                                            </svg>
+                                            Add to Apple Wallet
+                                        </button>
+                                    </div>
+
+                                    <!-- Apple Wallet Pass Overlay Animation -->
+                                    <div class="wallet-pass-overlay" id="wallet-pass-card">
+                                        <div class="wallet-pass">
+                                            <div class="pass-header">
+                                                <span class="pass-brand">AURA CONCIERGE</span>
+                                                <span class="pass-logo">A</span>
+                                            </div>
+                                            <div class="pass-body">
+                                                <div class="pass-row">
+                                                    <div class="pass-col">
+                                                        <span class="pass-label">PASS HOLDER</span>
+                                                        <span class="pass-val">Alex Sterling</span>
+                                                    </div>
+                                                    <div class="pass-col">
+                                                        <span class="pass-label" id="wallet-pass-label-2">PICKUP LOCATION</span>
+                                                        <span class="pass-val" id="wallet-pass-val-2">Soho Flagship</span>
+                                                    </div>
+                                                </div>
+                                                <div class="pass-barcode-wrapper">
+                                                    <div class="pass-barcode">||| | || |||| | ||| | ||| ||</div>
+                                                    <span class="pass-code-val" id="wallet-code-val">QR_9XJ22B</span>
+                                                </div>
+                                            </div>
+                                            <button class="close-wallet-btn" id="close-wallet">Done</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="receipt-items-section">
+                                        <h3 class="input-section-title">YOUR ITEMS</h3>
+                                        <div class="receipt-items-list" id="receipt-items-container">
+                                            <!-- Items render here -->
+                                        </div>
+                                    </div>
+
+                                    <div class="receipt-totals-box">
+                                        <div class="receipt-row">
+                                            <span>Subtotal</span>
+                                            <span id="receipt-subtotal">$640.00</span>
+                                        </div>
+                                        <div class="receipt-row">
+                                            <span>Tax</span>
+                                            <span id="receipt-tax">$51.20</span>
+                                        </div>
+                                        <div class="receipt-row receipt-total-row">
+                                            <span>Total</span>
+                                            <span id="receipt-total">$691.20</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="pickup-location-card">
+                                        <h4 class="pickup-loc-title" id="receipt-location-title">📍 PICKUP LOCATION</h4>
+                                        <p class="pickup-loc-name" id="receipt-pickup-store">Soho Flagship</p>
+                                        <p class="pickup-loc-addr" id="receipt-location-address">452 Broadway, New York, NY 10013</p>
+                                        <a href="#" class="get-directions-link" id="receipt-directions-link">GET DIRECTIONS ➔</a>
+                                    </div>
+
+                                    <div class="payment-method-confirmed-card">
+                                        <p class="pm-title">💳 PAYMENT METHOD</p>
+                                        <p class="pm-name" id="receipt-pm-val">Apple Pay</p>
+                                        <p class="pm-auth-code">Auth Code: <span id="receipt-auth-code">9XJ22B</span></p>
+                                    </div>
+
+                                    <button class="primary-btn green-btn ask-concierge-help-btn" style="margin-bottom: 25px;">
+                                        <span>✨</span> Ask Concierge for Help
+                                    </button>
+                                </div>
+
+                                <!-- Profile Login Section (Visible when logged out) -->
+                                <div class="profile-login-section" id="profile-login-section" style="display: none; padding: 20px 10px;">
+                                    <div class="login-card" style="background: white; border-radius: 16px; padding: 20px; box-shadow: var(--shadow-phone); border: 1px solid var(--color-border-phone);">
+                                        
+                                        <!-- Phoenix Logo Header -->
+                                        <div style="text-align: center; margin-bottom: 15px;">
+                                            <div class="phoenix-logo-container" style="margin-bottom: 10px; position: relative;">
+                                                <svg viewBox="0 0 100 100" class="phoenix-logo-svg" style="width: 58px; height: 58px; margin: 0 auto; display: block; filter: drop-shadow(0 0 6px rgba(255, 23, 73, 0.35));">
+                                                    <defs>
+                                                        <linearGradient id="phoenix-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                                            <stop offset="0%" stop-color="#D500F9" />
+                                                            <stop offset="40%" stop-color="#FF1744" />
+                                                            <stop offset="75%" stop-color="#FF9100" />
+                                                            <stop offset="100%" stop-color="#FFEA00" />
+                                                        </linearGradient>
+                                                    </defs>
+                                                    <circle cx="50" cy="50" r="45" fill="none" stroke="url(#phoenix-grad)" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4" class="spinning-halo" />
+                                                    <g transform="translate(0, 5)">
+                                                        <path d="M 50 70 C 42 60, 20 50, 12 35 C 10 30, 18 35, 26 42 C 18 28, 28 32, 38 42 C 28 15, 38 22, 46 38" fill="url(#phoenix-grad)" />
+                                                        <path d="M 50 70 C 58 60, 80 50, 88 35 C 90 30, 82 35, 74 42 C 82 28, 72 32, 62 42 C 72 15, 62 22, 54 38" fill="url(#phoenix-grad)" />
+                                                        <path d="M 50 70 Q 40 85, 30 92 Q 42 85, 50 78 Q 58 85, 70 92 Q 60 85, 50 70" fill="url(#phoenix-grad)" opacity="0.9" />
+                                                        <path d="M 50 20 L 47 32 Q 44 48, 47 68 L 50 72 L 53 68 Q 56 48, 53 32 Z" fill="url(#phoenix-grad)" />
+                                                        <path d="M 50 20 C 47 16, 48 10, 50 5 C 52 10, 53 16, 50 20" fill="#FFEA00" />
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <h3 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; color: var(--color-text-dark); margin: 0; letter-spacing: -0.3px; background: linear-gradient(135deg, #FF1744, #FF9100); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Phoenix Shopping Portal</h3>
+                                            <p style="font-size: 11px; color: var(--color-text-muted); margin-top: 4px;">Access your unified smart wardrobe concierge.</p>
+                                        </div>
+                                        
+                                        <!-- Tab switch controls -->
+                                        <div class="auth-tabs" style="display: flex; background: rgba(0,0,0,0.03); padding: 4px; border-radius: 8px; margin-bottom: 18px; border: 1px solid rgba(0,0,0,0.04);">
+                                            <button class="auth-tab-btn active" id="tab-auth-login" style="flex: 1; border: none; padding: 7px 0; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-align: center; background: white; color: var(--color-text-dark); box-shadow: 0 2px 4px rgba(0,0,0,0.05);">Sign In</button>
+                                            <button class="auth-tab-btn" id="tab-auth-register" style="flex: 1; border: none; padding: 7px 0; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; background: transparent; color: var(--color-text-muted);">Sign Up</button>
+                                        </div>
+                                        
+                                        <!-- Form 1: LOGIN -->
+                                        <div id="auth-login-form-container">
+                                            <div style="margin-bottom: 12px;">
+                                                <label style="font-size: 10px; font-weight: 700; color: var(--color-text-dark); display: block; margin-bottom: 5px; letter-spacing: 0.5px;">EMAIL ADDRESS</label>
+                                                <input type="email" id="login-email" value="alex.sterling@design.co" style="width: 100%; padding: 9px 12px; border: 1px solid var(--color-border-phone); border-radius: 8px; font-size: 12.5px; font-family: inherit; color: var(--color-text-dark);">
+                                            </div>
+                                            
+                                            <div style="margin-bottom: 18px;">
+                                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                                    <label style="font-size: 10px; font-weight: 700; color: var(--color-text-dark); letter-spacing: 0.5px; margin: 0;">PASSWORD</label>
+                                                    <span style="font-size: 10px; color: var(--color-primary); font-weight: 600; cursor: pointer;">Forgot?</span>
+                                                </div>
+                                                <input type="password" id="login-password" value="password123" style="width: 100%; padding: 9px 12px; border: 1px solid var(--color-border-phone); border-radius: 8px; font-size: 12.5px; font-family: inherit; color: var(--color-text-dark);">
+                                            </div>
+                                            
+                                            <button class="primary-btn green-btn" id="btn-profile-login" style="width: 100%; padding: 11px; margin-bottom: 8px; border-radius: 8px; font-size: 12.5px; height: auto;">Sign In</button>
+                                            <p style="font-size: 10.5px; text-align: center; color: var(--color-text-muted); margin-top: 10px;">Don't have an account? <span id="link-go-register" style="color: var(--color-primary); font-weight: 600; cursor: pointer; text-decoration: underline;">Create account</span></p>
+                                        </div>
+                                        
+                                        <!-- Form 2: REGISTER -->
+                                        <div id="auth-register-form-container" style="display: none;">
+                                            <div style="margin-bottom: 12px;">
+                                                <label style="font-size: 10px; font-weight: 700; color: var(--color-text-dark); display: block; margin-bottom: 5px; letter-spacing: 0.5px;">FULL NAME</label>
+                                                <input type="text" id="register-name" placeholder="John Doe" style="width: 100%; padding: 9px 12px; border: 1px solid var(--color-border-phone); border-radius: 8px; font-size: 12.5px; font-family: inherit; color: var(--color-text-dark);">
+                                            </div>
+                                            
+                                            <div style="margin-bottom: 12px;">
+                                                <label style="font-size: 10px; font-weight: 700; color: var(--color-text-dark); display: block; margin-bottom: 5px; letter-spacing: 0.5px;">EMAIL ADDRESS</label>
+                                                <input type="email" id="register-email" placeholder="john.doe@gmail.com" style="width: 100%; padding: 9px 12px; border: 1px solid var(--color-border-phone); border-radius: 8px; font-size: 12.5px; font-family: inherit; color: var(--color-text-dark);">
+                                            </div>
+                                            
+                                            <div style="margin-bottom: 12px;">
+                                                <label style="font-size: 10px; font-weight: 700; color: var(--color-text-dark); display: block; margin-bottom: 5px; letter-spacing: 0.5px;">PASSWORD</label>
+                                                <input type="password" id="register-password" placeholder="••••••••" style="width: 100%; padding: 9px 12px; border: 1px solid var(--color-border-phone); border-radius: 8px; font-size: 12.5px; font-family: inherit; color: var(--color-text-dark);">
+                                            </div>
+                                            
+                                            <div style="margin-bottom: 18px;">
+                                                <label style="font-size: 10px; font-weight: 700; color: var(--color-text-dark); display: block; margin-bottom: 5px; letter-spacing: 0.5px;">CONFIRM PASSWORD</label>
+                                                <input type="password" id="register-confirm-password" placeholder="••••••••" style="width: 100%; padding: 9px 12px; border: 1px solid var(--color-border-phone); border-radius: 8px; font-size: 12.5px; font-family: inherit; color: var(--color-text-dark);">
+                                            </div>
+                                            
+                                            <button class="primary-btn green-btn" id="btn-profile-register" style="width: 100%; padding: 11px; margin-bottom: 8px; border-radius: 8px; font-size: 12.5px; height: auto;">Create Account</button>
+                                            <p style="font-size: 10.5px; text-align: center; color: var(--color-text-muted); margin-top: 10px;">Already have an account? <span id="link-go-login" style="color: var(--color-primary); font-weight: 600; cursor: pointer; text-decoration: underline;">Sign In</span></p>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+
+                                <!-- Profile Details Section (Always Visible when logged in) -->
+                                <div class="profile-info-section" id="profile-info-section">
+                                    <div class="profile-card">
+                                        <div class="profile-avatar" id="profile-avatar-clickable" style="cursor: pointer; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--color-primary-light); color: var(--color-primary); width: 56px; height: 56px; border-radius: 50%;" title="Click to edit profile picture">
+                                            <span id="profile-avatar-txt">AS</span>
+                                            <div style="position: absolute; bottom: 0; right: 0; background: var(--color-primary); color: white; border-radius: 50%; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-size: 8px; border: 1.5px solid white;">✏️</div>
+                                        </div>
+                                        <div class="profile-details">
+                                            <h3 class="profile-name" id="profile-user-name">Alex Sterling</h3>
+                                            <p class="profile-meta" id="profile-user-email">alex.sterling@design.co</p>
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+                                                <p class="profile-meta" id="profile-user-phone" style="margin: 0;">+1 (555) 019-2837</p>
+                                                <button id="btn-profile-logout" style="background: none; border: none; color: #E53935; font-size: 11px; font-weight: 700; cursor: pointer; padding: 0;">Sign Out</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Profile Pic Editor Modal -->
+                                    <div class="profile-pic-modal" id="profile-pic-modal" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 13, 16, 0.95); z-index: 1001; align-items: center; justify-content: center; padding: 20px; color: var(--color-text-dark); border-radius: 36px;">
+                                        <div class="modal-content" style="background: white; border-radius: 16px; padding: 20px; box-shadow: var(--shadow-premium); border: 1px solid var(--color-border-phone); width: 100%;">
+                                            <div style="text-align: center; margin-bottom: 15px;">
+                                                <h4 style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; margin: 0; color: var(--color-text-dark);">Edit Profile Avatar</h4>
+                                                <p style="font-size: 11px; color: var(--color-text-muted); margin-top: 4px;">Choose an avatar preset or enter a custom photo URL.</p>
+                                            </div>
+                                            
+                                            <!-- Presets -->
+                                            <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;" id="avatar-presets-container">
+                                                <button class="avatar-preset-btn active-preset" data-type="initials" style="width: 44px; height: 44px; border-radius: 50%; background: var(--color-primary-light); color: var(--color-primary); border: 2px solid var(--color-primary); font-size: 13px; font-weight: 700; cursor: pointer;">AS</button>
+                                                <button class="avatar-preset-btn" data-type="img" data-url="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80" style="width: 44px; height: 44px; border-radius: 50%; overflow: hidden; border: 2px solid transparent; cursor: pointer; padding: 0; background: none;"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80" style="width:100%; height:100%; object-fit:cover;"></button>
+                                                <button class="avatar-preset-btn" data-type="img" data-url="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80" style="width: 44px; height: 44px; border-radius: 50%; overflow: hidden; border: 2px solid transparent; cursor: pointer; padding: 0; background: none;"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80" style="width:100%; height:100%; object-fit:cover;"></button>
+                                                <button class="avatar-preset-btn" data-type="img" data-url="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80" style="width: 44px; height: 44px; border-radius: 50%; overflow: hidden; border: 2px solid transparent; cursor: pointer; padding: 0; background: none;"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80" style="width:100%; height:100%; object-fit:cover;"></button>
+                                            </div>
+
+                                            <div style="margin-bottom: 15px;">
+                                                <label style="font-size: 10px; font-weight: 700; color: var(--color-text-dark); display: block; margin-bottom: 4px; letter-spacing: 0.5px;">CUSTOM IMAGE URL</label>
+                                                <input type="text" id="profile-pic-url-input" placeholder="https://example.com/pic.jpg" style="width: 100%; padding: 8px 10px; border: 1px solid var(--color-border-phone); border-radius: 6px; font-size: 12px; font-family: inherit; color: var(--color-text-dark);">
+                                            </div>
+
+                                            <div style="display: flex; gap: 8px;">
+                                                <button class="primary-btn outline-btn" id="btn-cancel-profile-pic" style="flex: 1; padding: 8px; font-size: 11px; border-radius: 6px; cursor: pointer; border: 1px solid var(--color-border-phone); background: transparent; color: var(--color-text-dark);">Cancel</button>
+                                                <button class="primary-btn green-btn" id="btn-save-profile-pic" style="flex: 1; padding: 8px; font-size: 11px; border-radius: 6px; cursor: pointer;">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="profile-item-card">
+                                        <div class="card-title-row">
+                                            <span class="card-icon">📍</span>
+                                            <h4 class="card-title">Saved Address</h4>
+                                        </div>
+                                        <p class="card-text" id="profile-saved-address">72 Greene Street, Apt 4B<br>Soho, New York, NY 10012</p>
+                                    </div>
+
+                                    <div class="profile-item-card">
+                                        <div class="card-title-row">
+                                            <span class="card-icon">💳</span>
+                                            <h4 class="card-title">Default Payment</h4>
+                                        </div>
+                                        <p class="card-text">Visa ending in <strong id="profile-saved-card">4242</strong></p>
+                                    </div>
+                                </div>
+
+                                <!-- Past Order History Section -->
+                                <div class="order-history-section" id="order-history-section">
+                                    <h3 class="input-section-title">ORDER HISTORY</h3>
+                                    <div class="order-history-list" id="order-history-list">
+                                        <!-- Past orders populated dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SCREEN 8: AR VIRTUAL FITTING ROOM -->
+                        <div class="app-screen" id="screen-virtual-fit">
+                            <div class="screen-header">
+                                <button class="menu-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+                                <span class="screen-title">AR Fitting Chamber</span>
+                                <div class="header-right">
+                                    <button class="back-btn" id="btn-close-ar"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></button>
+                                </div>
+                            </div>
+
+                            <div class="screen-body" style="padding: 0; overflow: hidden; position: relative; display: flex; flex-direction: column; background: #000;">
+                                <!-- Mode Switcher Tabs -->
+                                <div class="ar-mode-tabs">
+                                    <button class="ar-tab-btn active" id="tab-ar-webcam">📸 Webcam AR</button>
+                                    <button class="ar-tab-btn" id="tab-ar-google">✨ Google AI Try-On</button>
+                                </div>
+
+                                <!-- Live Camera Viewport -->
+                                <div class="camera-viewport">
+                                    <!-- Shutter flash overlay -->
+                                    <div class="shutter-flash" id="camera-flash"></div>
+
+                                    <!-- Grid lines rule of thirds -->
+                                    <div class="thirds-grid">
+                                        <div class="grid-line line-h-1"></div>
+                                        <div class="grid-line line-h-2"></div>
+                                        <div class="grid-line line-v-1"></div>
+                                        <div class="grid-line line-v-2"></div>
+                                    </div>
+
+                                    <!-- Live Video feed -->
+                                    <video id="webcam-feed" autoplay playsinline muted></video>
+
+                                    <!-- Fallback fashion model avatar -->
+                                    <div class="model-avatar-fallback" id="webcam-fallback">
+                                        <div class="fallback-model-avatar-img">👤</div>
+                                        <p class="fallback-text">Camera Standby • Avatar Try-on</p>
+                                    </div>
+
+                                    <!-- AR Clothing Drag-and-scale overlay -->
+                                    <div class="ar-clothing-overlay-wrapper" id="ar-overlay-wrapper">
+                                        <img src="/static/images/products/wool_blazer.png" alt="AR Dressing Fit" class="ar-clothing-img" id="ar-clothing-overlay-img">
+                                        <!-- Draggable resize handle indicators -->
+                                        <div class="ar-drag-indicator">↕ Drag to Position • Scroll/Scrollpad to Scale</div>
+                                    </div>
+
+                                    <!-- AI Generative Try-on Viewport (Google-style) -->
+                                    <div class="ai-tryon-viewport" id="ai-tryon-viewport" style="display: none;">
+                                        <img id="ai-tryon-model-img" src="/static/images/models/model_m_blazer.png" alt="AI Try-On Drape">
+                                        <!-- AI Generation Loader overlay -->
+                                        <div class="ai-drape-loader" id="ai-tryon-loader" style="display: none;">
+                                            <div class="loader-spinner"></div>
+                                            <p class="loader-status-text" id="ai-loader-status">Aura Drape Engine processing fabric physics...</p>
+                                            <div class="progress-bar-bg"><div class="progress-bar-fill" id="ai-drape-progress" style="width: 0%;"></div></div>
+                                            <span class="progress-pct" id="ai-drape-pct">0%</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Capture snapshot preview feedback slide up -->
+                                    <div class="snapshot-saved-card" id="snapshot-toast" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 14px;">
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <div class="snap-thumb"><img id="snap-thumb-img" src="" alt="Fit check"></div>
+                                            <div class="snap-details">
+                                                <p class="snap-toast-title" style="margin: 0; font-size: 11.5px;">Fit Snapshot Captured! 📸</p>
+                                                <p class="snap-toast-desc" style="margin: 2px 0 0 0; font-size: 10px;">Saved to your fit logs.</p>
+                                            </div>
+                                        </div>
+                                        <button id="btn-open-pic-editor" style="background: var(--color-primary); color: white; border: none; padding: 5px 8px; border-radius: 6px; font-size: 10px; font-weight: 700; cursor: pointer; margin-left: 10px; flex-shrink: 0; box-shadow: 0 4px 6px rgba(0,0,0,0.15);">🎨 EDIT</button>
+                                    </div>
+                                </div>
+
+                                <!-- AR Sizing Calibration Controls -->
+                                <div class="ar-controls-bar">
+                                    <div class="zoom-btn-row">
+                                        <button class="control-circle-btn" id="btn-ar-scale-down" title="Scale Down">-</button>
+                                        <button class="control-text-btn" id="btn-ar-reset">RESET FIT</button>
+                                        <button class="control-circle-btn" id="btn-ar-scale-up" title="Scale Up">+</button>
+                                    </div>
+                                    
+                                    <!-- Fit analysis report -->
+                                    <div class="fit-analysis-panel">
+                                        <div class="fit-header-row">
+                                            <span class="fit-title-tag">📏 AR FIT ESTIMATOR</span>
+                                            <span class="fit-score-badge" id="ar-fit-score">96% MATCH</span>
+                                        </div>
+                                        <div class="fit-metrics-list">
+                                            <div class="metric-row">
+                                                <span>Shoulder Alignment</span>
+                                                <div class="meter-bg"><div class="meter-fill" id="meter-shoulders" style="width: 98%;"></div></div>
+                                                <span class="metric-val">98%</span>
+                                            </div>
+                                            <div class="metric-row">
+                                                <span>Length Match</span>
+                                                <div class="meter-bg"><div class="meter-fill" id="meter-length" style="width: 94%;"></div></div>
+                                                <span class="metric-val">94%</span>
+                                            </div>
+                                        </div>
+                                        <p class="fit-verdict-txt" id="ar-fit-verdict">Fits slightly loose in chest. Ideal for layering.</p>
+                                        <button class="primary-btn green-btn" id="btn-ar-ai-review" style="padding: 10px; font-size: 11px; margin-top: 10px; width: 100%; border-radius: 8px;">🤖 Request AI Fit Review</button>
+                                    </div>
+
+                                    <!-- AI Model Selector (shown in Google AI Try-On mode) -->
+                                    <div class="ai-model-selector-wrapper" id="ai-model-selector-block" style="display: none; margin-bottom: 12px;">
+                                        <p class="ar-carousel-title">SELECT MODEL BODY TYPE</p>
+                                        <div class="ai-model-list" id="ai-model-list">
+                                            <div class="model-card" data-model="s">
+                                                <div class="model-card-badge" style="background: rgba(239, 83, 80, 0.15); color: #EF5350;">S</div>
+                                                <span class="model-card-name">Taylor</span>
+                                                <span class="model-card-desc">Slim • 5'7"</span>
+                                            </div>
+                                            <div class="model-card active" data-model="m">
+                                                <div class="model-card-badge" style="background: rgba(102, 187, 106, 0.15); color: #66BB6A;">M</div>
+                                                <span class="model-card-name">Jordan</span>
+                                                <span class="model-card-desc">Regular • 5'9"</span>
+                                            </div>
+                                            <div class="model-card" data-model="l">
+                                                <div class="model-card-badge" style="background: rgba(41, 182, 246, 0.15); color: #29B6F6;">L</div>
+                                                <span class="model-card-name">Morgan</span>
+                                                <span class="model-card-desc">Athletic • 6'0"</span>
+                                            </div>
+                                            <div class="model-card" data-model="xl">
+                                                <div class="model-card-badge" style="background: rgba(255, 202, 40, 0.15); color: #FFCA28;">XL</div>
+                                                <span class="model-card-name">Alex</span>
+                                                <span class="model-card-desc">Plus • 5'11"</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Active Dressing Carousel Selector -->
+                                    <div class="ar-product-carousel-wrapper">
+                                        <p class="ar-carousel-title">SELECT ITEM TO FIT</p>
+                                        <div class="ar-product-carousel" id="ar-product-selector">
+                                            <!-- Dynamic items populate here -->
+                                        </div>
+                                    </div>
+
+                                    <!-- Circular shutter button -->
+                                    <div class="shutter-row">
+                                        <button class="shutter-button" id="btn-camera-shutter" aria-label="Take Fit Photo">
+                                            <div class="shutter-inner"></div>
+                                        </button>
+                                        <button class="camera-toggle-btn" id="btn-camera-toggle" title="Toggle Camera Mode">📷 Switch Camera</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Phone Bottom Nav Bar -->
+                    <div class="phone-bottom-nav">
+                        <button class="nav-item active-nav" data-screen="bag">
+                            <span class="nav-icon">👜</span>
+                            <span class="nav-label">Bag</span>
+                        </button>
+                        <button class="nav-item" data-screen="map">
+                            <span class="nav-icon">📍</span>
+                            <span class="nav-label">Shop</span>
+                        </button>
+                        <button class="nav-item" data-screen="fitting-room">
+                            <span class="nav-icon">🔑</span>
+                            <span class="nav-label">Orders</span>
+                        </button>
+                        <button class="nav-item" data-screen="receipt">
+                            <span class="nav-icon">👤</span>
+                            <span class="nav-label">Profile</span>
+                        </button>
+                    <!-- Dynamic Picture Editor Overlay -->
+                    <div class="pic-editor-overlay" id="pic-editor-overlay" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 13, 16, 0.96); z-index: 1000; flex-direction: column; padding: 20px; color: white; border-radius: 36px; overflow: hidden; box-shadow: inset 0 0 40px rgba(0,0,0,0.8);">
+                        <!-- Editor Header -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; margin-bottom: 12px; flex-shrink: 0;">
+                            <h3 style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: white; margin: 0; letter-spacing: -0.2px;">Aura Fit-Check Editor</h3>
+                            <button id="close-pic-editor" style="background: none; border: none; color: #8A98A8; font-size: 24px; cursor: pointer; padding: 0; line-height: 1;">×</button>
+                        </div>
+                        
+                        <!-- Image Canvas Viewport -->
+                        <div style="flex: 1; display: flex; align-items: center; justify-content: center; background: #000; border-radius: 12px; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.06); max-height: 250px; margin-bottom: 12px;">
+                            <img id="editor-image-preview" src="" style="max-width: 100%; max-height: 100%; object-fit: contain; transition: filter 0.2s;">
+                            <div id="editor-watermark-overlay" style="position: absolute; bottom: 12px; right: 12px; font-family: var(--font-heading); font-size: 8px; color: rgba(255,255,255,0.6); pointer-events: none; text-shadow: 1px 1px 2px rgba(0,0,0,0.9); letter-spacing: 0.8px; display: none; background: rgba(0,0,0,0.4); padding: 2px 6px; border-radius: 4px;">CURATED BY AURA</div>
+                        </div>
+
+                        <!-- Editor Controls Scroll Panel -->
+                        <div style="display: flex; flex-direction: column; gap: 10px; overflow-y: auto; flex-shrink: 0; padding-right: 2px; margin-bottom: 12px; max-height: 200px;">
+                            <!-- Filter Selector Chips -->
+                            <div>
+                                <label style="font-size: 9px; font-weight: 700; color: var(--color-text-muted); display: block; margin-bottom: 4px; letter-spacing: 0.5px;">FILTERS</label>
+                                <div style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none;">
+                                    <button class="filter-chip active-filter" data-filter="none" style="flex-shrink: 0; background: var(--color-primary); border: 1px solid var(--color-primary); color: white; padding: 5px 10px; border-radius: 20px; font-size: 10.5px; font-weight: 600; cursor: pointer;">Original</button>
+                                    <button class="filter-chip" data-filter="noir" style="flex-shrink: 0; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 5px 10px; border-radius: 20px; font-size: 10.5px; font-weight: 600; cursor: pointer;">Sleek Noir</button>
+                                    <button class="filter-chip" data-filter="warm" style="flex-shrink: 0; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 5px 10px; border-radius: 20px; font-size: 10.5px; font-weight: 600; cursor: pointer;">Vintage Warm</button>
+                                    <button class="filter-chip" data-filter="glow" style="flex-shrink: 0; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 5px 10px; border-radius: 20px; font-size: 10.5px; font-weight: 600; cursor: pointer;">Modern Glow</button>
+                                    <button class="filter-chip" data-filter="ambient" style="flex-shrink: 0; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 5px 10px; border-radius: 20px; font-size: 10.5px; font-weight: 600; cursor: pointer;">Aura Ambient</button>
+                                </div>
+                            </div>
+
+                            <!-- Adjustment Sliders -->
+                            <div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                                    <label style="font-size: 9px; font-weight: 700; color: var(--color-text-muted); letter-spacing: 0.5px; margin: 0;">BRIGHTNESS</label>
+                                    <span id="brightness-val" style="font-size: 9px; color: var(--color-primary); font-weight: 700;">100%</span>
+                                </div>
+                                <input type="range" id="slider-brightness" min="50" max="150" value="100" style="width: 100%; accent-color: var(--color-primary); background: rgba(255,255,255,0.1); height: 4px; border-radius: 2px; outline: none; margin-bottom: 6px;">
+                                
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                                    <label style="font-size: 9px; font-weight: 700; color: var(--color-text-muted); letter-spacing: 0.5px; margin: 0;">CONTRAST</label>
+                                    <span id="contrast-val" style="font-size: 9px; color: var(--color-primary); font-weight: 700;">100%</span>
+                                </div>
+                                <input type="range" id="slider-contrast" min="50" max="150" value="100" style="width: 100%; accent-color: var(--color-primary); background: rgba(255,255,255,0.1); height: 4px; border-radius: 2px; outline: none; margin-bottom: 6px;">
+
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+                                    <label style="font-size: 9px; font-weight: 700; color: var(--color-text-muted); letter-spacing: 0.5px; margin: 0;">SATURATION</label>
+                                    <span id="saturation-val" style="font-size: 9px; color: var(--color-primary); font-weight: 700;">100%</span>
+                                </div>
+                                <input type="range" id="slider-saturation" min="0" max="200" value="100" style="width: 100%; accent-color: var(--color-primary); background: rgba(255,255,255,0.1); height: 4px; border-radius: 2px; outline: none;">
+                            </div>
+
+                            <!-- Watermark / Overlay text checkbox -->
+                            <div style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.04); padding: 6px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+                                <input type="checkbox" id="chk-editor-watermark" style="accent-color: var(--color-primary); width: 13px; height: 13px; cursor: pointer;">
+                                <label for="chk-editor-watermark" style="font-size: 10.5px; color: white; cursor: pointer; font-weight: 600; margin: 0;">Add styling watermark label</label>
+                            </div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div style="display: flex; gap: 10px; margin-top: auto; padding-bottom: 10px;">
+                            <button class="primary-btn outline-btn" id="btn-editor-reset" style="flex: 1; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px; font-size: 12px; border-radius: 8px; background: transparent; cursor: pointer; height: auto;">RESET</button>
+                            <button class="primary-btn green-btn" id="btn-editor-save" style="flex: 2; padding: 10px; font-size: 12px; border-radius: 8px; cursor: pointer; height: auto;">SAVE CHANGES</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load JavaScript -->
+    <script src="/static/js/app.js?v=13"></script>
+</body>
+</html>
