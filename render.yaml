@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: phoenix-retail-concierge
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+        description: "Google Gemini API key from AI Studio"

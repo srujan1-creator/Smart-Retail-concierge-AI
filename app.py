@@ -10,6 +10,12 @@ from google.genai import types
 app = Flask(__name__)
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'aura_concierge.db')
 
+# Auto-initialize SQLite database on import if it doesn't exist yet
+if not os.path.exists(DB_PATH):
+    print("[Database] Initializing database for the first time...")
+    from database import init_db
+    init_db()
+
 # Instantiate searcher
 searcher = ProductVectorSearch()
 
