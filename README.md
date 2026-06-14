@@ -6,7 +6,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.11+-3776ab?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-3.x-000000?style=flat-square&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
-[![Gemini](https://img.shields.io/badge/Gemini_2.0_Flash-Powered-4285F4?style=flat-square&logo=google&logoColor=white)](https://ai.google.dev)
+[![Gemini](https://img.shields.io/badge/Gemini_2.5_Flash-Powered-4285F4?style=flat-square&logo=google&logoColor=white)](https://ai.google.dev)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/srujan1-creator/Smart-Retail-concierge-AI)
@@ -24,7 +24,7 @@
 ## ✨ Features
 
 ### 🧠 AI-Powered Concierge (Gemini 2.5 Flash)
-- **Real-time conversational AI** — Powered by Google's Gemini 2.0 Flash model
+- **Real-time conversational AI** — Powered by Google's Gemini 2.5 Flash model
 - **Multi-turn memory** — Maintains conversation context across messages
 - **Product-aware responses** — Semantic search results injected into AI context
 - **Calendar-smart recommendations** — Personalizes suggestions based on upcoming events
@@ -146,7 +146,7 @@ graph LR
     C -->|Product Query| D[Vector Search]
     C -->|Stock Check| E[SQLite DB]
     C -->|Fit Analysis| F[Fit Engine]
-    D --> G[Gemini 2.0 Flash]
+    D --> G[Gemini 2.5 Flash]
     E --> G
     G --> H[AI Response]
     H --> I[Frontend UI]
@@ -192,7 +192,7 @@ curl -X POST http://localhost:5000/api/chat \
 
 | Layer | Technology |
 |-------|-----------|
-| **AI Engine** | Google Gemini 2.0 Flash |
+| **AI Engine** | Google Gemini 2.5 Flash |
 | **Backend** | Python 3.11, Flask |
 | **Database** | SQLite3 |
 | **Search** | TF-IDF Vector Search (custom) |
@@ -272,6 +272,6 @@ This project is licensed under the MIT License — see the [LICENSE](LICENSE) fi
 
 **Built with ❤️ and 🔥 Phoenix AI**
 
-*Powered by Google Gemini 2.0 Flash*
+*Powered by Google Gemini 2.5 Flash*
 
 </div>

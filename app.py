@@ -529,7 +529,7 @@ def chat():
                 ))
 
             gemini_response = gemini_client.models.generate_content(
-                model="gemini-2.0-flash",
+                model="gemini-2.5-flash",
                 contents=contents,
                 config=types.GenerateContentConfig(
                     system_instruction=CONCIERGE_SYSTEM_PROMPT,
