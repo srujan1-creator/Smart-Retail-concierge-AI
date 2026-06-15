@@ -1,12 +1,11 @@
-/* AURA CONCIERGE DESIGN SYSTEM */
 :root {
     --bg-dashboard: #0A0D10;
     --bg-panel: rgba(18, 22, 28, 0.85);
     --bg-phone: #F7F9FA;
-    --color-primary: #2E6F40;        /* Brand Green */
-    --color-primary-light: #EBF5EE;  /* Light background green */
-    --color-accent: #8E7A53;         /* Stylist Gold/Taupe */
-    --color-accent-light: #F7F5F0;   /* Light Gold/Taupe */
+    --color-primary: #ff6b35;        /* Phoenix Orange */
+    --color-primary-light: #fff0ea;  /* Light background peach */
+    --color-accent: #c99b53;         /* Stylist Gold/Taupe */
+    --color-accent-light: #fcfaf5;   /* Light Gold/Taupe */
     --color-text-dark: #1A1F26;
     --color-text-light: #E2E8F0;
     --color-text-muted: #8A98A8;
@@ -14,7 +13,7 @@
     --color-border-phone: #E2E8F0;
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
-    --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    --shadow-premium: 0 20px 40px -15px rgba(255, 107, 53, 0.15);
     --shadow-phone: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
     --radius-premium: 16px;
     --transition-smooth: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -74,7 +73,7 @@ body {
 .brand-logo {
     width: 46px;
     height: 46px;
-    background: linear-gradient(135deg, var(--color-primary), #48A362);
+    background: linear-gradient(135deg, var(--color-primary), #f7c948);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -83,7 +82,7 @@ body {
     font-weight: 800;
     color: white;
     font-size: 22px;
-    box-shadow: 0 8px 16px rgba(46, 111, 64, 0.3);
+    box-shadow: 0 8px 16px rgba(255, 107, 53, 0.3);
 }
 
 .brand-name {
@@ -105,10 +104,10 @@ body {
 .status-indicator {
     width: 8px;
     height: 8px;
-    background: #00E676;
+    background: #ff6b35;
     border-radius: 50%;
     display: inline-block;
-    box-shadow: 0 0 10px #00E676;
+    box-shadow: 0 0 10px #ff6b35;
     animation: pulse 2s infinite;
 }
 
@@ -798,11 +797,11 @@ body {
 .green-btn {
     background: var(--color-primary);
     color: white;
-    box-shadow: 0 6px 20px rgba(46, 111, 64, 0.25);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.25);
 }
 
 .green-btn:hover {
-    background: #235431;
+    background: #e05e2d;
     transform: translateY(-1px);
 }
 

@@ -866,7 +866,7 @@ function setupEventListeners() {
                 size: "One Size"
             });
             DOM.btnApplyRec.innerText = "Added to Reservation ✓";
-            DOM.btnApplyRec.style.color = "#2E6F40";
+            DOM.btnApplyRec.style.color = "#c99b53";
             renderFittingRoom();
             addAssistantMessage("Great choice! I have added the **Silk Pocket Square** to your fitting room reservation list.");
         }
@@ -1361,7 +1361,7 @@ function highlightMapPin(pinId) {
             circle.setAttribute("cx", "0");
             circle.setAttribute("cy", "0");
             circle.setAttribute("r", "14");
-            circle.setAttribute("fill", "#2E6F40");
+            circle.setAttribute("fill", "#ff6b35");
             circle.setAttribute("opacity", "0.2");
             circle.setAttribute("class", "pulse-ring");
             target.prepend(circle);

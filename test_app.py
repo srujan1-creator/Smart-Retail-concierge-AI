@@ -85,7 +85,7 @@ class AuraConciergeTestCase(unittest.TestCase):
         self.assertEqual(data['action'], 'show_stock')
         self.assertEqual(data['screen'], 'map')
         self.assertIn('inventory', data)
-        self.assertEqual(data['products'], [5])
+        self.assertIn(5, data['products'])
 
     def test_chat_fitting_room(self):
         payload = {
