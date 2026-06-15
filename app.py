@@ -528,15 +528,30 @@ def chat():
                     parts=[types.Part.from_text(text=msg["content"])]
                 ))
 
-            gemini_response = gemini_client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=contents,
-                config=types.GenerateContentConfig(
-                    system_instruction=CONCIERGE_SYSTEM_PROMPT,
-                    temperature=0.8,
-                    max_output_tokens=500,
-                )
-            )
+            models_to_try = ["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"]
+            gemini_response = None
+            last_error = None
+            
+            for m_name in models_to_try:
+                try:
+                    gemini_response = gemini_client.models.generate_content(
+                        model=m_name,
+                        contents=contents,
+                        config=types.GenerateContentConfig(
+                            system_instruction=CONCIERGE_SYSTEM_PROMPT,
+                            temperature=0.8,
+                            max_output_tokens=500,
+                        )
+                    )
+                    break
+                except Exception as ex:
+                    last_error = ex
+                    print(f"[Gemini] Failed with {m_name}: {ex}")
+                    continue
+            
+            if gemini_response is None:
+                raise last_error
+
             
             ai_text = gemini_response.text.strip()
             
